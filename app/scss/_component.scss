@@ -1,0 +1,11 @@
+$dashboard_14:    #C4C4C4;
+$dashboard_49:    #769AA6;
+$dashboard_54:    #4F7383;
+
+header                  {display:inline-block; width:100%; margin:13px 0 12px; padding-top:18px; border-top:1px solid $dashboard_14;
+  svg#clock             {float:left; margin-right:8px; margin-left: -6px;}
+  .timezone-data        {float:left;
+    .timezone           {@include font-size(23px); margin:6px 0px; color:$dashboard_54;}
+    .timezone-time      {@include font-size(14px); color:$dashboard_49;}
+  }
+}
