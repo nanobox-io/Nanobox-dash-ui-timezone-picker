@@ -7,7 +7,8 @@
     "shadow-icons": "tolmark12/shadow-icons-js",
     "timezone-picker": "dosx/timezone-picker",
     "timezone-js": "~0.4.13",
-    "moment": "^2.13.0"
+    "moment": "^2.13.0",
+    "moment-timezone": "^0.5.3"
   },
   "ignore": [
     "app",

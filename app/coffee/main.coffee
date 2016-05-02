@@ -36,9 +36,6 @@ class TimezonePicker
     # this view if the timezone of 'optModel' != UTC, so this is not needed atm.
     # google.maps.event.trigger(@tzp, 'resize')
 
-    # missing timezone
-    if !timezone = @options.timezone then console.warn "Missing timezone. Setting timezone to 'UTC'"; timezone = "UTC"
-
     #
     @tzp.timezonePicker
       jsonRootUrl: "#{@options.path}/tz_json/"
@@ -53,13 +50,36 @@ class TimezonePicker
         streetViewControl: false
 
       #
-      onReady: => @tzp.timezonePicker('selectZone', timezone); @onReady()
+      onReady: =>
+
+        #
+        timezone = @options.timezone
+
+        #
+        switch
+
+          # if no timezone is provided try to set to local timezone
+          when !timezone
+            @tzp.timezonePicker('selectZone', moment.tz.guess()); @onReady()
+
+          # if UTC set display to UTC; this has to be done manually for now because
+          # timezone picker doesn't support "UTC"
+          when timezone == "UTC"
+            @$node.find(".timezone").html("UTC")
+            @$node.find(".timezone-time").html(moment().utc().format("hh:mm a"))
+
+          # if there is a timezone then set it
+          else @tzp.timezonePicker('selectZone', timezone); @onReady()
+
+      #
       onHover: (utcOffset, tzNames) => @onHover(utcOffset, tzNames)
+
+      #
       onSelected : (olsonName, utcOffset, tzName) =>
         tz_time = moment()
         tz_time.milliseconds(tz_time.milliseconds() - (tz_time.utcOffset() - utcOffset) * 60 * 1000)
 
-        #
+        # update the display for the selected timezone
         @$node.find(".timezone").html("#{olsonName} - #{new timezoneJS.Date(olsonName).getTimezoneAbbreviation()}")
         @$node.find(".timezone-time").html(tz_time.format("hh:mm a"))
 
