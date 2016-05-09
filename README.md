@@ -13,10 +13,12 @@ tz.build()
 ```
 
 ## Options
-| Option | Description | Default action/value |
-|---|---|---|
-| path | the root most path to [tz_json](https://github.com/dosx/timezone-picker#setup) and [tzdata](https://github.com/mde/timezone-js#setup) | **required** |
-| timezone | the current timezone to set once instantiated | UTC |
-| onReady | Callback for "onReady" events | Set current timezone |
-| onHover | Callback for "onHover" events | none
-| onSelected | Callback for "onSelected" events | Update time display |
+| Option=default | Description |
+|---|---|
+| logsEnabled=false | Is logging enabled (T/F) |
+| logLevel="INFO" | Selected log level of [available levels](https://github.com/sdomino/dash/blob/master/src/dash.coffee#L8) |
+| path="" (required) | the root most path to [tz_json](https://github.com/dosx/timezone-picker#setup) and [tzdata](https://github.com/mde/timezone-js#setup) |
+| timezone="UTC" | the current timezone to set once instantiated |
+| onReady="" (Set current timezone) | Callback for "onReady" events |
+| onHover="" | Callback for "onHover" events |
+| onSelected="" (Update time display) | Callback for "onSelected" events |
