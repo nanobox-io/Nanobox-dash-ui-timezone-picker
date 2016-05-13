@@ -23,11 +23,11 @@ class TimezonePicker
     @$node = $(component())
     $el.append @$node
 
-    # add svg icons
-    castShadows($(".shadow-parent"))
-
   #
   build : () ->
+
+    # add svg icons
+    castShadows($(".shadow-parent"))
 
     #
     timezoneJS.timezone.zoneFileBasePath = "#{@options.path}/tz/";
@@ -54,7 +54,7 @@ class TimezonePicker
         mapTypeControl: false
         streetViewControl: false
 
-      #
+      # set the current timezone and call provided call back if any
       onReady: =>
 
         #
@@ -65,7 +65,7 @@ class TimezonePicker
 
           # if no timezone is provided try to set to local timezone
           when !timezone
-            @tzp.timezonePicker('selectZone', moment.tz.guess()); @onReady()
+            @tzp.timezonePicker('selectZone', moment.tz.guess())
 
           # if UTC set display to UTC; this has to be done manually for now because
           # timezone picker doesn't support "UTC"
@@ -74,12 +74,16 @@ class TimezonePicker
             @$node.find(".timezone-time").html(moment().utc().format("hh:mm a"))
 
           # if there is a timezone then set it
-          else @tzp.timezonePicker('selectZone', timezone); @onReady()
+          else @tzp.timezonePicker('selectZone', timezone)
 
-      #
+        # call provided callback
+        @onReady()
+
+      # call provided callback if any
       onHover: (utcOffset, tzNames) => @onHover(utcOffset, tzNames)
 
-      #
+      # update the display for the selected timezone then call provided callback
+      # if any
       onSelected : (olsonName, utcOffset, tzName) =>
         tz_time = moment()
         tz_time.milliseconds(tz_time.milliseconds() - (tz_time.utcOffset() - utcOffset) * 60 * 1000)
@@ -88,7 +92,7 @@ class TimezonePicker
         @$node.find(".timezone").html("#{olsonName} - #{new timezoneJS.Date(olsonName).getTimezoneAbbreviation()}")
         @$node.find(".timezone-time").html(tz_time.format("hh:mm a"))
 
-        #
+        # call provided callback
         @onSelected(olsonName, utcOffset, tzName)
 
 #
