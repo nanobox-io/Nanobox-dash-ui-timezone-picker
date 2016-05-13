@@ -1,20 +1,17 @@
 component = require 'jade/component'
 
+#
 class TimezonePicker
 
   #
-  constructor: ($el, @options) ->
+  constructor: ($el, @options={}) ->
 
     # missing path
     if !@options.path then console.error "Missing /path/to timezone data!";
 
-    #
-    timezoneJS.timezone.zoneFileBasePath = "#{@options.path}/tz/";
-    timezoneJS.timezone.init()
-
-    #
-    @$node = $(component())
-    $el.append @$node
+    # set defaults
+    if !@options.logsEnabled then @options.logsEnabled = false
+    if !@options.loglevel then @options.logLevel = "INFO"
 
     #
     noop = () -> console.warn "No callback provided"
@@ -22,11 +19,19 @@ class TimezonePicker
     @onHover = @options.onHover || noop
     @onSelected = @options.onSelected || noop
 
+    #
+    @$node = $(component())
+    $el.append @$node
+
     # add svg icons
     castShadows($(".shadow-parent"))
 
   #
   build : () ->
+
+    #
+    timezoneJS.timezone.zoneFileBasePath = "#{@options.path}/tz/";
+    timezoneJS.timezone.init()
 
     #
     @tzp = @$node.find("#zonepicker")
