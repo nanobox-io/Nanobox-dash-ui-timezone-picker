@@ -7,7 +7,7 @@ onHover = (utcOffset, tzNames) -> console.log "HOVER!", arguments
 onSelected = (olsonName, utcOffset, tzName) -> console.log "SELECTED!", arguments
 
 # instantiate component
-tz = new nanobox.TimezonePicker $("body"), {path: "/path/to/assets", timezone:"UTC", onReady: onReady, onHover: onHover; onSelected: onSelected}
+tz = new nanobox.TimezonePicker $("body"), {path: "/path/to/assets", timezone:"UTC", onReady: onReady, onHover: onHover, onSelected: onSelected}
 tz.build()
 
 ```
