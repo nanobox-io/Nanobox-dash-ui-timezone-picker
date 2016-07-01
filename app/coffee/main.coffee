@@ -34,15 +34,15 @@ class TimezonePicker
     timezoneJS.timezone.init()
 
     #
-    @tzp = @$node.find("#zonepicker")
+    @$tzp = @$node.find("#zonepicker")
 
     # there is a known issue with the map api, where when it starts display:none
     # it renders weird... this will fix it if needed, however, we're only rendering
     # this view if the timezone of 'optModel' != UTC, so this is not needed atm.
-    # google.maps.event.trigger(@tzp, 'resize')
+    # google.maps.event.trigger(@$tzp, 'resize')
 
     #
-    @tzp.timezonePicker
+    @$tzp.timezonePicker
       jsonRootUrl: "#{@options.path}/tz_json/"
       mapOptions:
         zoom: 2
@@ -65,7 +65,7 @@ class TimezonePicker
 
           # if no timezone is provided try to set to local timezone
           when !timezone
-            @tzp.timezonePicker('selectZone', moment.tz.guess())
+            @$tzp.timezonePicker('selectZone', moment.tz.guess())
 
           # if UTC set display to UTC; this has to be done manually for now because
           # timezone picker doesn't support "UTC"
@@ -74,7 +74,7 @@ class TimezonePicker
             @$node.find(".timezone-time").html(moment().utc().format("hh:mm a"))
 
           # if there is a timezone then set it
-          else @tzp.timezonePicker('selectZone', timezone)
+          else @$tzp.timezonePicker('selectZone', timezone)
 
         # call provided callback
         @onReady()
@@ -94,6 +94,9 @@ class TimezonePicker
 
         # call provided callback
         @onSelected(olsonName, utcOffset, tzName)
+
+    # return the timezone element
+    return @$tzp
 
 #
 window.nanobox ||= {}
