@@ -1,7 +1,9 @@
-header                  {display:flex; width:100%; margin:12px 0px;
-  svg#timezone-clock    {margin-right:8px;}
-  .timezone-data        {display:flex; flex-direction:column;
-    .timezone           {@include font-size(23px); margin:5px 0px; color:$dashboard_54;}
-    .timezone-time      {@include font-size(14px); color:$dashboard_49;}
+.nanobox-dash-ui-timezone {
+  header                  {display:flex; width:100%; margin:12px 0px;
+    svg#timezone-clock    {margin-right:8px;}
+    .timezone-data        {display:flex; flex-direction:column;
+      .timezone           {@include font-size(23px); margin:5px 0px; color:$dashboard_54;}
+      .timezone-time      {@include font-size(14px); color:$dashboard_49;}
+    }
   }
 }
