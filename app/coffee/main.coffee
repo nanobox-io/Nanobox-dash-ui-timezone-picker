@@ -30,10 +30,6 @@ class TimezonePicker
     castShadows($(".shadow-parent"))
 
     #
-    timezoneJS.timezone.zoneFileBasePath = "#{@options.path}/tz/";
-    timezoneJS.timezone.init()
-
-    #
     @$tzp = @$node.find("#zonepicker")
 
     # there is a known issue with the map api, where when it starts display:none
@@ -89,7 +85,7 @@ class TimezonePicker
         tz_time.milliseconds(tz_time.milliseconds() - (tz_time.utcOffset() - utcOffset) * 60 * 1000)
 
         # update the display for the selected timezone
-        @$node.find(".timezone").html("#{olsonName} - #{new timezoneJS.Date(olsonName).getTimezoneAbbreviation()}")
+        @$node.find(".timezone").html("#{olsonName} - #{tzName}")
         @$node.find(".timezone-time").html(tz_time.format("hh:mm a"))
 
         # call provided callback
