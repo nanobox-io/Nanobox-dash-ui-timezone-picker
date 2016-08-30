@@ -27,7 +27,7 @@ class TimezonePicker
   build : () ->
 
     # add svg icons
-    castShadows($(".shadow-parent"))
+    castShadows(@$node)
 
     #
     @$tzp = @$node.find("#zonepicker")
