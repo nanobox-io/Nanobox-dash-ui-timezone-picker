@@ -14,12 +14,6 @@ class TimezonePicker
     if !@options.loglevel then @options.logLevel = "INFO"
 
     #
-    noop = () -> console.warn "No callback provided"
-    @onReady = @options.onReady || noop
-    @onHover = @options.onHover || noop
-    @onSelected = @options.onSelected || noop
-
-    #
     @$node = $(component())
     $el.append @$node
 
@@ -73,10 +67,10 @@ class TimezonePicker
           else @$tzp.timezonePicker('selectZone', timezone)
 
         # call provided callback
-        @onReady()
+        @options.onReady?()
 
       # call provided callback if any
-      onHover: (utcOffset, tzNames) => @onHover(utcOffset, tzNames)
+      onHover: (utcOffset, tzNames) => @options.onHover?(utcOffset, tzNames)
 
       # update the display for the selected timezone then call provided callback
       # if any
@@ -89,7 +83,7 @@ class TimezonePicker
         @$node.find(".timezone-time").html(tz_time.format("hh:mm a"))
 
         # call provided callback
-        @onSelected(olsonName, utcOffset, tzName)
+        @options.onSelected?(olsonName, utcOffset, tzName)
 
     # return the timezone element
     return @$tzp
