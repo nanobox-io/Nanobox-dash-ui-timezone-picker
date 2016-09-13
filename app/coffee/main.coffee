@@ -9,10 +9,6 @@ class TimezonePicker
     # missing path
     if !@options.path then console.error "Missing /path/to timezone data!";
 
-    # set defaults
-    if !@options.logsEnabled then @options.logsEnabled = false
-    if !@options.loglevel then @options.logLevel = "INFO"
-
     #
     @$node = $(component())
     $el.append @$node
