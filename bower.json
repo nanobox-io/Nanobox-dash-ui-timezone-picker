@@ -1,8 +1,8 @@
 {
   "name": "timezone-picker",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "dependencies": {
-    "jquery": "*",
+    "jquery": "^3.1.1",
     "velocity": "~1.1.0",
     "shadow-icons": "tolmark12/shadow-icons-js",
     "timezone-picker": "dosx/timezone-picker",
